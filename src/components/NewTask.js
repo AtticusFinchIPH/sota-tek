@@ -1,7 +1,11 @@
-import './NewTask.css';
+
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import './NewTask.css';
+import { addTask } from '../actions/taskActions';
 
 const NewTask = () => {
+    const dispatch = useDispatch();
     const today = new Date();
     const date = `${today.getDate()}`.length === 1 ? `0${today.getDate()}` : `${today.getDate()}`;
     const month = `${today.getMonth()}`.length === 1 ? `0${today.getMonth()}` : `${today.getMonth()}`;
@@ -29,7 +33,7 @@ const NewTask = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(title, desc, dueDate, priority)
+        dispatch(addTask({ title, desc, dueDate, priority }));
     }
     return (
         <div className="newTask container-md">
