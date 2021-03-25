@@ -12,7 +12,31 @@ body {
 }
 h2 {
   font-size: 1.125rem;
-  margin-bottom: 5rem;
+}
+/* form {
+  display: flex;
+  flex-direction: column;
+} */
+input, select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem;
+}
+select:hover {
+  cursor: pointer;
+}
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+}
+button {
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
 }
 
 code {
@@ -29,4 +53,10 @@ code {
 .container-md {
   border: solid 1px black;
   padding-top: 30px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
