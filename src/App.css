@@ -12,7 +12,6 @@
     padding-bottom: 5rem;
     padding-left: 0;
 }
-
 @media (min-width: 64em) {
     .app {
         grid-template-columns: 2fr 3fr;
@@ -20,7 +19,11 @@
         grid-template-areas: 
             "newTask todoList"
         ;
+    }
+}
+@media (min-width: 87.5em) {
+    .app {
         padding-right: 10rem;
         padding-left: 10rem;
     }
-  }
+}

@@ -22,12 +22,16 @@ input, select {
   width: 100%;
   padding: 0.5rem;
 }
-select:hover {
+input, select:hover {
   cursor: pointer;
 }
 textarea {
   box-sizing: border-box;
   width: 100%;
+}
+label {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 button {
   background-color: #4caf50;
@@ -37,6 +41,7 @@ button {
 button:hover {
   cursor: pointer;
   box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+  border: none;
 }
 
 code {
