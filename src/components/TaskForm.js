@@ -11,6 +11,10 @@ const TaskForm = ({task, isNew}) => {
     const [desc, setDesc] = useState(task.desc);
     const [dueDate, setDueDate] = useState(task.dueDate);
     const [priority, setPriority] = useState(task.priority);
+    const today = new Date();
+    const date = `${today.getDate()}`.length === 1 ? `0${today.getDate()}` : `${today.getDate()}`;
+    const month = `${today.getMonth()}`.length === 1 ? `0${today.getMonth()}` : `${today.getMonth()}`;
+    const todayFormatted = `${today.getFullYear()}-${month}-${date}`;
     const changeTitle = (e) => {
         e.preventDefault();
         setTitle(e.target.value);
@@ -30,7 +34,13 @@ const TaskForm = ({task, isNew}) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addTask({ title, desc, dueDate, priority }));
+        if (isNew) {
+            dispatch(addTask({ title, desc, dueDate, priority }));
+            setTitle('');
+            setDesc('');
+            setDueDate(todayFormatted);
+            setPriority(2);
+        }
     }
     return (
         <form className="taskForm" onSubmit={handleSubmit}>
@@ -55,6 +65,7 @@ const TaskForm = ({task, isNew}) => {
                 <input 
                     type="date" placeholder="Add new task ..."
                     name="tf__input__date"
+                    min={todayFormatted}
                     value={dueDate}
                     onChange={changeDueDate}
                 />
