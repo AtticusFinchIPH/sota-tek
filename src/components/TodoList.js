@@ -4,9 +4,10 @@ import TaskForm from './TaskForm';
 import './TodoList.css';
 import { removeTasks } from '../actions/taskActions';
 
-const TaskBar = ({task}) => {
+const TaskBar = ({task, handleBulkTasks}) => {
     const dispatch = useDispatch();
     const [detailActive, setDetailActive] = useState(false);
+    const [checked, setChecked] = useState(false);
     let todoListDetailClass = `todoList__detail`;
     if (detailActive) {
         todoListDetailClass += ' detail-active';
@@ -19,6 +20,10 @@ const TaskBar = ({task}) => {
     const handleRemove = () => {
         dispatch(removeTasks([task]))
     }
+    const handleCheck = () => {
+        handleBulkTasks(task, !checked)
+        setChecked(!checked);
+    }
     return (
         <div className="todoList__taskbar">
             <div className="todoList__resume">
@@ -26,18 +31,20 @@ const TaskBar = ({task}) => {
                     <input 
                         className="tdl__resume__checkbox"
                         type="checkbox"
+                        checked={checked}
+                        onChange={handleCheck}
                     />
                     <span className="tdl__resume__span">{task.title}</span> 
                 </label>
                 <div className="tdl__resume__buttons">
                     <button 
-                        className="tdl__resume__button__detail"
+                        className="tdl__resume__button background_sky_blue"
                         onClick={handleDetail}
                     >
                         Detail
                     </button>
                     <button 
-                        className="tdl__resume__button__remove"
+                        className="tdl__resume__button background_red"
                         onClick={handleRemove}
                     >
                         Remove
@@ -52,21 +59,33 @@ const TaskBar = ({task}) => {
 }
 
 const TodoList = () => {
+    const dispatch = useDispatch();
     const tasks = useSelector(state => state.tasks)
                 .sort((task1, task2) =>{
                     const time1 = (new Date(task1.dueDate)).getTime();
                     const time2 = (new Date(task2.dueDate)).getTime();
                     return time1 - time2;
                 });
-    console.log(tasks)
     const [search, setSearch] = useState('');
+    const [bulkTasks, setBulkTasks] = useState([]);
     const changeSearch = (e) => {
         e.preventDefault();
         setSearch(e.target.value);
     }
+    const handleBulkTasks = (task, isContained) => {
+        if (isContained) {
+            const index = bulkTasks.findIndex(item => item.id === task.id);
+            if (index < 0) setBulkTasks(list => [...list, task]);
+        } else {
+            setBulkTasks(list => list.filter(item => item.id !== task.id));
+        }
+    }
+    const handleRemove = () => {
+        dispatch(removeTasks(bulkTasks))
+    }
     return (
         <div className="todoList container-md">
-            <h2>Todo List</h2>
+            <h2>To Do List</h2>
             <div className="todoList__content">
                 <input 
                     className="todoList__search"
@@ -76,8 +95,24 @@ const TodoList = () => {
                     onChange={changeSearch}
                 />
                 {
-                    tasks.map((task) => <TaskBar key={task.id} task={task} />)
+                    tasks.map((task) => <TaskBar key={task.id} task={task} handleBulkTasks={handleBulkTasks}/>)
                 }
+            </div>
+            <div className="todoList__bulk background_gray">
+                <p>Bulk Action:</p>
+                <div className="tdl__resume__buttons">
+                    <button 
+                        className="tdl__bulk__button background_ocean_blue"
+                    >
+                        Done
+                    </button>
+                    <button 
+                        className="tdl__bulk__button background_red"
+                        onClick={handleRemove}
+                    >
+                        Remove
+                    </button>
+                </div>
             </div>
         </div>
     )

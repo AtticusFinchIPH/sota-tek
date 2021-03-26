@@ -3,7 +3,7 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 4fr 1fr 1fr 1fr;
+    grid-template-rows: 2.25rem 9.25rem 3.625rem 3.625rem 2.25rem;
     grid-template-areas:
         "taskForm__title"
         "taskForm__desc"
@@ -19,7 +19,7 @@
 @media (min-width: 40em) {
     .taskForm {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 4fr 2fr 1fr;
+        grid-template-rows: 2.25rem 9.25rem 4.5rem 2.25rem;
         grid-template-areas:
             "taskForm__title taskForm__title"
             "taskForm__desc taskForm__desc"
@@ -31,7 +31,7 @@
 @media (min-width: 63.9375em) and (max-width: 87.4375em) {
     .taskForm {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 4fr 1fr 1fr 1fr;
+        grid-template-rows: 2.25rem 9.25rem 3.625rem 3.625rem 2.25rem;
         grid-template-areas:
             "taskForm__title"
             "taskForm__desc"
@@ -44,7 +44,7 @@
 @media (min-width: 87.4375em) {
     .taskForm {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 4fr 2fr 1fr;
+        grid-template-rows: 2.25rem 9.25rem 4.5rem 2.25rem;
         grid-template-areas:
             "taskForm__title taskForm__title"
             "taskForm__desc taskForm__desc"

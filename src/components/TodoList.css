@@ -1,12 +1,18 @@
+
+.background_red { background-color: #d9534f; }
+.background_sky_blue { background-color: #17bdd4; }
+.background_ocean_blue { background-color: #2196f3; }
+.background_gray { background-color: #e0e0e0; }
 .todoList {
     grid-area: todoList;
+    position: relative;
 }
 .todoList__content {
     display: flex;
     flex-direction: column;
     padding-top: 2rem;
     padding-right: 3rem;
-    padding-bottom: 2rem;
+    padding-bottom: 10rem;
     padding-left: 3rem;
 }
 .todoList__search {
@@ -43,15 +49,9 @@
     justify-content: space-between;
     width: 200px;
 }
-.tdl__resume__button__detail {
+.tdl__resume__button {
     width: 5.5rem;
     height: 1.75rem;
-    background-color: #17bdd4;
-}
-.tdl__resume__button__remove {
-    width: 5.5rem;
-    height: 1.75rem;
-    background-color: #d9534f;
 }
 .todoList__detail {
     max-height: 0;
@@ -61,4 +61,19 @@
 .todoList__detail.detail-active {
     border-top: solid 1px black;
     max-height: 40rem;
+}
+.todoList__bulk {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 1rem;
+    bottom: 0;
+    width: 100%;
+    border-top: solid 1px black;
+}
+.tdl__bulk__button {
+    width: 5.75rem;
+    height: 2.25rem;
 }
