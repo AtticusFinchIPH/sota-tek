@@ -59,20 +59,38 @@ const TaskBar = ({task, handleBulkTasks}) => {
     )
 }
 
+const sortByDueDate = (tasks) => {
+    return tasks.sort((task1, task2) => {
+        const time1 = (new Date(task1.dueDate)).getTime();
+        const time2 = (new Date(task2.dueDate)).getTime();
+        return time1 - time2;
+    });
+}
+
+const sortBySearchTitle = (tasks, searchKey) => {
+    if (searchKey === '') return tasks;
+    return tasks.filter(task => task.title === searchKey);
+}
+
 const TodoList = () => {
     const dispatch = useDispatch();
-    const tasks = useSelector(state => state.tasks)
-                .sort((task1, task2) =>{
-                    const time1 = (new Date(task1.dueDate)).getTime();
-                    const time2 = (new Date(task2.dueDate)).getTime();
-                    return time1 - time2;
-                });
+    const tasks = useSelector(state => state.tasks);
     const [search, setSearch] = useState('');
+    // const [searchKey, setSearchKey] = useState('');
     const [bulkTasks, setBulkTasks] = useState([]);
     const changeSearch = (e) => {
         e.preventDefault();
-        setSearch(e.target.value);
+        const value = e.target.value;
+        setSearch(value);
+        setBulkTasks([]);
     }
+    // const handleSearchKey = (e) => {
+    //     e.preventDefault();
+    //     if (e.keyCode === 13 || search.length === 0) {
+    //         console.log(search);
+    //         setSearchKey(search);
+    //     }
+    // }
     const handleBulkTasks = (task, isContained) => {
         if (isContained) {
             const index = bulkTasks.findIndex(item => item.id === task.id);
@@ -96,9 +114,10 @@ const TodoList = () => {
                     name="tdl__input__search"
                     value={search}
                     onChange={changeSearch}
+                    // onKeyUp={e => handleSearchKey(e)}
                 />
                 {
-                    tasks.map((task) => <TaskBar key={task.id} task={task} handleBulkTasks={handleBulkTasks}/>)
+                    sortBySearchTitle(sortByDueDate(tasks), search).map((task) => <TaskBar key={task.id} task={task} handleBulkTasks={handleBulkTasks}/>)
                 }
             </div>
             {
