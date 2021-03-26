@@ -18,6 +18,7 @@ const TaskBar = ({task, handleBulkTasks}) => {
         setDetailActive(isActive => !isActive);
     }
     const handleRemove = () => {
+        handleBulkTasks(task, false)
         dispatch(removeTasks([task]))
     }
     const handleCheck = () => {
@@ -81,6 +82,8 @@ const TodoList = () => {
         }
     }
     const handleRemove = () => {
+        console.log(bulkTasks)
+        setBulkTasks([])
         dispatch(removeTasks(bulkTasks))
     }
     return (
@@ -98,22 +101,26 @@ const TodoList = () => {
                     tasks.map((task) => <TaskBar key={task.id} task={task} handleBulkTasks={handleBulkTasks}/>)
                 }
             </div>
-            <div className="todoList__bulk background_gray">
-                <p>Bulk Action:</p>
-                <div className="tdl__resume__buttons">
-                    <button 
-                        className="tdl__bulk__button background_ocean_blue"
-                    >
-                        Done
-                    </button>
-                    <button 
-                        className="tdl__bulk__button background_red"
-                        onClick={handleRemove}
-                    >
-                        Remove
-                    </button>
+            {
+                bulkTasks.length > 0
+                &&
+                <div className="todoList__bulk background_gray">
+                    <p>Bulk Action:</p>
+                    <div className="tdl__resume__buttons">
+                        <button 
+                            className="tdl__bulk__button background_ocean_blue"
+                        >
+                            Done
+                        </button>
+                        <button 
+                            className="tdl__bulk__button background_red"
+                            onClick={handleRemove}
+                        >
+                            Remove
+                        </button>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     )
 }
