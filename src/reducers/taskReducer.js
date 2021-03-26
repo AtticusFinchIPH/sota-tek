@@ -1,9 +1,25 @@
-import { ADD_TASK } from '../constants/taskConstants';
+import { ADD_TASK, REMOVE_TASKS } from '../constants/taskConstants';
 
-function tasksReducer (state = [], action) {
+function tasksReducer (state = JSON.parse(localStorage.getItem('tasks')) || [], action) {
+    let newTasks;
     switch (action.type) {
         case ADD_TASK:
-            return [...state, action.payload];    
+            newTasks = [...state, action.payload];
+            localStorage.setItem('tasks', JSON.stringify(newTasks));
+            return newTasks;
+        case REMOVE_TASKS:
+            const removeArray = action.payload;
+            newTasks = state.filter(task => !removeArray.some((item) => { 
+                if (
+                    item.title === task.title &&
+                    item.desc === task.desc &&
+                    item.dueDate === task.dueDate &&
+                    item.priority === task.priority               
+                ) return true;
+                else return false;
+            }))
+            localStorage.setItem('tasks', JSON.stringify(newTasks));
+            return newTasks;
         default:
             return state;
     }

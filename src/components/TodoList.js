@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TaskForm from './TaskForm';
 import './TodoList.css';
+import { removeTasks } from '../actions/taskActions';
 
 const TaskBar = ({task}) => {
+    const dispatch = useDispatch();
     const [detailActive, setDetailActive] = useState(false);
     let todoListDetailClass = `todoList__detail`;
     if (detailActive) {
@@ -15,7 +17,7 @@ const TaskBar = ({task}) => {
         setDetailActive(isActive => !isActive);
     }
     const handleRemove = () => {
-
+        dispatch(removeTasks([task]))
     }
     return (
         <div className="todoList__taskbar">
@@ -50,7 +52,12 @@ const TaskBar = ({task}) => {
 }
 
 const TodoList = () => {
-    const tasks = useSelector(state => state.tasks);
+    const tasks = useSelector(state => state.tasks)
+                .sort((task1, task2) =>{
+                    const time1 = (new Date(task1.dueDate)).getTime();
+                    const time2 = (new Date(task2.dueDate)).getTime();
+                    return time1 - time2;
+                });
     console.log(tasks)
     const [search, setSearch] = useState('');
     const changeSearch = (e) => {
@@ -69,7 +76,7 @@ const TodoList = () => {
                     onChange={changeSearch}
                 />
                 {
-                    tasks.map((task, i) => <TaskBar key={i} task={task} />)
+                    tasks.map((task, i) => <TaskBar key={`${task.title}_${i}`} task={task} />)
                 }
             </div>
         </div>
