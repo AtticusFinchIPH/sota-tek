@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './NewTask.css';
 import './TaskForm.css';
-import { addTask } from '../actions/taskActions';
+import { addTask, updateTask } from '../actions/taskActions';
 
-const TaskForm = ({task, isNew}) => {
+const TaskForm = ({task, isNew, closeDetail}) => {
     const dispatch = useDispatch();
     const [title, setTitle] = useState(task.title);
     const [desc, setDesc] = useState(task.desc);
@@ -35,11 +35,14 @@ const TaskForm = ({task, isNew}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isNew) {
-            dispatch(addTask({ title, desc, dueDate, priority }));
+            dispatch(addTask({ id: Math.random(), title, desc, dueDate, priority }));
             setTitle('');
             setDesc('');
             setDueDate(todayFormatted);
             setPriority(2);
+        } else {
+            dispatch(updateTask({ id: task.id, title, desc, dueDate, priority }));
+            closeDetail();
         }
     }
     return (

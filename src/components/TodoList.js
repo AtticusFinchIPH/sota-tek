@@ -45,7 +45,7 @@ const TaskBar = ({task}) => {
                 </div>
             </div>
             <div className={todoListDetailClass}>
-                <TaskForm task={task} isNew={false} />
+                <TaskForm task={task} isNew={false} closeDetail={() => handleDetail()} />
             </div>
         </div>
     )
@@ -76,7 +76,7 @@ const TodoList = () => {
                     onChange={changeSearch}
                 />
                 {
-                    tasks.map((task, i) => <TaskBar key={`${task.title}_${i}`} task={task} />)
+                    tasks.map((task) => <TaskBar key={task.id} task={task} />)
                 }
             </div>
         </div>

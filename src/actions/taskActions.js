@@ -1,8 +1,15 @@
-import { ADD_TASK, REMOVE_TASKS } from '../constants/taskConstants';
+import { ADD_TASK, REMOVE_TASKS, UPDATE_TASK } from '../constants/taskConstants';
 
 const addTask = (task) => (dispatch) => {
     dispatch({
         type: ADD_TASK,
+        payload: task
+    })
+}
+
+const updateTask = (task) => (dispatch) => {
+    dispatch({
+        type: UPDATE_TASK,
         payload: task
     })
 }
@@ -14,4 +21,4 @@ const removeTasks = (tasks) => (dispatch) => {
     })
 }
 
-export { addTask, removeTasks };
+export { addTask, updateTask, removeTasks };
