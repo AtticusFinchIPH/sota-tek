@@ -1,0 +1,73 @@
+
+.taskForm {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2.25rem 9.25rem 3.625rem 3.625rem 2.25rem;
+    grid-template-areas:
+        "taskForm__title"
+        "taskForm__desc"
+        "taskForm__date"
+        "taskForm__prio"
+        "taskForm__submit"
+    ;
+    padding-top: 2rem;
+    padding-right: 3rem;
+    padding-bottom: 2rem;
+    padding-left: 3rem;
+}
+@media (min-width: 40em) {
+    .taskForm {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 2.25rem 9.25rem 4.5rem 2.25rem;
+        grid-template-areas:
+            "taskForm__title taskForm__title"
+            "taskForm__desc taskForm__desc"
+            "taskForm__date taskForm__prio"
+            "taskForm__submit taskForm__submit"
+        ;
+    }
+}
+@media (min-width: 63.9375em) and (max-width: 87.4375em) {
+    .taskForm {
+        grid-template-columns: 1fr;
+        grid-template-rows: 2.25rem 9.25rem 3.625rem 3.625rem 2.25rem;
+        grid-template-areas:
+            "taskForm__title"
+            "taskForm__desc"
+            "taskForm__date"
+            "taskForm__prio"
+            "taskForm__submit"
+        ;
+    }
+}
+@media (min-width: 87.4375em) {
+    .taskForm {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 2.25rem 9.25rem 4.5rem 2.25rem;
+        grid-template-areas:
+            "taskForm__title taskForm__title"
+            "taskForm__desc taskForm__desc"
+            "taskForm__date taskForm__prio"
+            "taskForm__submit taskForm__submit"
+        ;
+    }
+}
+.taskForm__title {
+    grid-area: taskForm__title;
+}
+.taskForm__desc {
+    grid-area: taskForm__desc;
+}
+.taskForm__date {
+    grid-area: taskForm__date;
+}
+.taskForm__prio {
+    grid-area: taskForm__prio;
+}
+.taskForm__add {
+    grid-area: taskForm__submit;
+}
+.taskForm__update {
+    grid-area: taskForm__submit;
+}

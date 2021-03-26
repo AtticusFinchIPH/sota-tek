@@ -1,0 +1,79 @@
+
+.background_red { background-color: #d9534f; }
+.background_sky_blue { background-color: #17bdd4; }
+.background_ocean_blue { background-color: #2196f3; }
+.background_gray { background-color: #e0e0e0; }
+.todoList {
+    grid-area: todoList;
+    position: relative;
+}
+.todoList__content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    padding-right: 3rem;
+    padding-bottom: 10rem;
+    padding-left: 3rem;
+}
+.todoList__search {
+    margin-bottom: 1.5rem;
+}
+.todoList__taskbar {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    margin-bottom: 1rem;
+}
+.todoList__resume {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+.tdl__resume__label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+.tdl__resume__checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 1rem;
+}
+.tdl__resume__span {
+    font-size: 1rem;
+}
+.tdl__resume__buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+.tdl__resume__button {
+    width: 5.5rem;
+    height: 1.75rem;
+}
+.todoList__detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease-out;
+}
+.todoList__detail.detail-active {
+    border-top: solid 1px black;
+    max-height: 40rem;
+}
+.todoList__bulk {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 1rem;
+    bottom: 0;
+    width: 100%;
+    border-top: solid 1px black;
+}
+.tdl__bulk__button {
+    width: 5.75rem;
+    height: 2.25rem;
+}
