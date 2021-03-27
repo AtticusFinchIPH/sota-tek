@@ -125,7 +125,7 @@ const TodoList = () => {
                 &&
                 <div className="todoList__bulk background_gray">
                     <p>Bulk Action:</p>
-                    <div className="tdl__resume__buttons">
+                    <div className="tdl__bulk__buttons">
                         <button 
                             className="tdl__bulk__button background_ocean_blue"
                         >

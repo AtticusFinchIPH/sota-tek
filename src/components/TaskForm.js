@@ -1,6 +1,8 @@
 
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './NewTask.css';
 import './TaskForm.css';
 import { addTask, updateTask } from '../actions/taskActions';
@@ -9,12 +11,8 @@ const TaskForm = ({task, isNew, closeDetail}) => {
     const dispatch = useDispatch();
     const [title, setTitle] = useState(task.title);
     const [desc, setDesc] = useState(task.desc);
-    const [dueDate, setDueDate] = useState(task.dueDate);
+    const [dueDate, setDueDate] = useState(Date.parse(task.dueDate));
     const [priority, setPriority] = useState(task.priority);
-    const today = new Date();
-    const date = `${today.getDate()}`.length === 1 ? `0${today.getDate()}` : `${today.getDate()}`;
-    const month = `${today.getMonth()}`.length === 1 ? `0${today.getMonth()}` : `${today.getMonth()}`;
-    const todayFormatted = `${today.getFullYear()}-${month}-${date}`;
     const changeTitle = (e) => {
         e.preventDefault();
         setTitle(e.target.value);
@@ -23,10 +21,9 @@ const TaskForm = ({task, isNew, closeDetail}) => {
         e.preventDefault();
         setDesc(e.target.value);
     }
-    const changeDueDate = (e) => {
-        e.preventDefault();
-        console.log(e.target.value)
-        setDueDate(e.target.value);
+    const changeDueDate = (date) => {
+        console.log(date)
+        setDueDate(date);
     }
     const changePriority = (e) => {
         e.preventDefault();
@@ -38,13 +35,22 @@ const TaskForm = ({task, isNew, closeDetail}) => {
             dispatch(addTask({ id: Math.random(), title, desc, dueDate, priority }));
             setTitle('');
             setDesc('');
-            setDueDate(todayFormatted);
+            setDueDate(new Date())
             setPriority(2);
         } else {
             dispatch(updateTask({ id: task.id, title, desc, dueDate, priority }));
             closeDetail();
         }
     }
+    const CustomDateInput = forwardRef(
+        ({ value, onClick }, ref) => (
+            <input 
+                type='text' readOnly={true}
+                onClick={onClick} ref={ref} value={value}
+                style={{ height: '40px'}}
+            />
+        ),
+    );
     return (
         <form className="taskForm" onSubmit={handleSubmit}>
             <input 
@@ -65,13 +71,15 @@ const TaskForm = ({task, isNew, closeDetail}) => {
             </div>
             <div className="taskForm__date flex-column">
                 <label htmlFor="tf__input__date"><b>Due Date</b></label>
-                <input 
-                    type="date" placeholder="Add new task ..."
-                    name="tf__input__date"
-                    min={todayFormatted}
-                    value={dueDate}
-                    onChange={changeDueDate}
-                />
+                <div className="customDatePickerWidth">
+                    <DatePicker
+                        dateFormat="d MMM yyyy"
+                        minDate={new Date()}
+                        selected={dueDate}
+                        onChange={changeDueDate}
+                        customInput={<CustomDateInput />}
+                    />
+                </div>
             </div>
             <div className="taskForm__prio flex-column">
                 <label htmlFor="tf__select__prio"><b>Priority</b></label>

@@ -4,14 +4,10 @@ import './NewTask.css';
 import TaskForm from './TaskForm';
 
 const NewTask = () => {
-    const today = new Date();
-    const date = `${today.getDate()}`.length === 1 ? `0${today.getDate()}` : `${today.getDate()}`;
-    const month = `${today.getMonth()}`.length === 1 ? `0${today.getMonth()}` : `${today.getMonth()}`;
-    const todayFormatted = `${today.getFullYear()}-${month}-${date}`;
     const defaultTask = {
         title: '',
         desc: '',
-        dueDate: todayFormatted,
+        dueDate: new Date(),
         priority: 2
     }
     return (
