@@ -11,7 +11,7 @@ const TaskForm = ({task, isNew, closeDetail}) => {
     const dispatch = useDispatch();
     const [title, setTitle] = useState(task.title);
     const [desc, setDesc] = useState(task.desc);
-    const [dueDate, setDueDate] = useState(Date.parse(task.dueDate));
+    const [dueDate, setDueDate] = useState(task.dueDate instanceof Date ? task.dueDate : Date.parse(task.dueDate));
     const [priority, setPriority] = useState(task.priority);
     const changeTitle = (e) => {
         e.preventDefault();
